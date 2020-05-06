@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { ThemeProvider, injectGlobal } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Header from "../components/Header";
 import Meta from "../components/Meta";
 
@@ -13,19 +13,8 @@ const theme = {
   bs: "0 12px 24px 0 rgba (0, 0, 0, 0.09)",
 };
 
-const StyledPage = styled.div`
-  background: #fff;
-  color: ${(props) => props.theme.black};
-`;
-
-const Inner = styled.div`
-  max-width: ${(props) => props.theme.maxWidth};
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
 // Global styles
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'radnika_next';
     src: url('/static/radnikanext-medium-webfont.woff2')
@@ -55,10 +44,22 @@ injectGlobal`
   }
 `;
 
+const StyledPage = styled.div`
+  background: #fff;
+  color: ${(props) => props.theme.black};
+`;
+
+const Inner = styled.div`
+  max-width: ${(props) => props.theme.maxWidth};
+  margin: 0 auto;
+  padding: 2rem;
+`;
+
 class Page extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <StyledPage>
           <Meta />
           <Header />
