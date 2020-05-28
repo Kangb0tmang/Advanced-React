@@ -1,11 +1,19 @@
 const Mutations = {
-  createDog(parent, args, ctx, info) {
-    global.dogs = global.dogs || [];
-    // Create a doggo
-    const newDog = { name: args.name };
-    global.dogs.push(newDog);
-    return newDog;
-  }
+  createItem(parent, args, ctx, info) {
+    // TODO: Check if they're logged in
+    const item = ctx.db.mutation.createItem(
+      {
+        data: {
+          // title: args.title,
+          // description: args.desc
+          ...args,
+        },
+      },
+      info
+    );
+
+    return item;
+  },
 };
 
 module.exports = Mutations;
